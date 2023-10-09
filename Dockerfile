@@ -1,4 +1,4 @@
-FROM golang:1.21-bullseye as builder
+FROM golang:1-alpine3.18
 
 ENV CGO_ENABLED=1
 ENV GOOS=linux
