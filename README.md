@@ -112,9 +112,9 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - name: Generate README
-              uses: huantt/weather-forecast@v1.0.5
+              uses: benefrancis/weather-forecast@v1.0.5
               with:
-                city: HaNoi
+                city: Osasco
                 days: 7
                 weather-api-key: ${{ secrets.WEATHER_API_KEY }}
                 template-file: 'README.md.template'
@@ -151,7 +151,7 @@ jobs:
 
 #### Install
 ```shell
-go install https://github.com/huantt/weather-forecast
+go install https://github.com/benefrancis/weather-forecast
 ```
 
 #### Run
@@ -176,7 +176,7 @@ weather-forecast update-weather \
 --days=7 \
 --weather-api-key="$WEATHER_API_KEY" \
 --template-file='template/README.md.template' \
---city=HaNoi \
+--city=Osasco \
 --out-file='README.md'
 ```
 
@@ -190,7 +190,7 @@ docker run --rm \
 -v ./:/app/data \
 weather-forecast \
 --weather-api-key='XXXX' \
---city=HaNoi \
+--city=Osasco \
 --out-file=data/README.md \
 --template-file=data/README.md.template
 ```
