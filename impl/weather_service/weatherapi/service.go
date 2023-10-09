@@ -10,10 +10,10 @@ import (
 )
 
 type WeatherService struct {
-	service *weatherapi_com.Service
+	service *Service
 }
 
-func NewWeatherService(service *weatherapi_com.Service) *WeatherService {
+func NewWeatherService(service *Service) *WeatherService {
 	return &WeatherService{service}
 }
 
@@ -29,7 +29,7 @@ func (s *WeatherService) Forecast(ctx context.Context, city string, days int) ([
 	return weathers, nil
 }
 
-func toWeathers(forecast weatherapi_com.Forecast) ([]model.Weather, error) {
+func toWeathers(forecast Forecast) ([]model.Weather, error) {
 	timezoneOffset, err := utils.GetTimezoneOffset(forecast.Location.TzId)
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func toWeathers(forecast weatherapi_com.Forecast) ([]model.Weather, error) {
 	return weathers, nil
 }
 
-func forecastDayToWeather(forecastDay weatherapi_com.ForecastDay, country, city, timezone string, timezoneOffset int64) model.Weather {
+func forecastDayToWeather(forecastDay ForecastDay, country, city, timezone string, timezoneOffset int64) model.Weather {
 	startTime := time.Unix(forecastDay.DateEpoch, 0)
 	endTime := startTime.Add(time.Hour)
 	return model.Weather{
@@ -70,7 +70,7 @@ func forecastDayToWeather(forecastDay weatherapi_com.ForecastDay, country, city,
 	}
 }
 
-func forecastHourToWeather(hour weatherapi_com.ForecastHour, country, city, timezone string, timezoneOffset int64) model.Weather {
+func forecastHourToWeather(hour ForecastHour, country, city, timezone string, timezoneOffset int64) model.Weather {
 	startTime := time.Unix(hour.TimeEpoch, 0)
 	endTime := startTime.Add(time.Hour)
 	return model.Weather{
